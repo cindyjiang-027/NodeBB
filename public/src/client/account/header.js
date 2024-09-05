@@ -153,16 +153,20 @@ define('forum/account/header', [
 					return;
 				}
 
-				socket.emit('user.removeCover', {
-					uid: ajaxify.data.uid,
-				}, function (err) {
-					if (!err) {
-						ajaxify.refresh();
-					} else {
-						alerts.error(err);
-					}
-				});
+				emitRemoveCover();
 			});
+		});
+	}
+
+	function emitRemoveCover() {
+		socket.emit('user.removeCover', {
+			uid: ajaxify.data.uid,
+		}, function (err) {
+			if (!err) {
+				ajaxify.refresh();
+			} else {
+				alerts.error(err);
+			}
 		});
 	}
 
