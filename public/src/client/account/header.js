@@ -152,7 +152,7 @@ define('forum/account/header', [
 				if (!confirm) {
 					return;
 				}
-				console.log('I made edit here to call on a helper function emitRemoveCover() instead of using nested functions.');
+				console.log('Cindy Jiang');
 				emitRemoveCover();
 			});
 		});
