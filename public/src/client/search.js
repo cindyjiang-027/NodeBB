@@ -156,20 +156,27 @@ define('forum/search', [
 		const formData = utils.merge(searchData, params);
 
 		if (formData) {
-			if (ajaxify.data.term) {
-				$('#search-input').val(ajaxify.data.term);
-			}
-			formData.in = formData.in || ajaxify.data.searchDefaultIn;
-			$('#search-in').val(formData.in);
-			updateFormItemVisiblity(formData.in);
+			
+      // if (ajaxify.data.term) {
+			// 	$('#search-input').val(ajaxify.data.term);
+			// }
+      setValue('#search-input', ajaxify.data.term);
+			
+      formData.in = formData.in || ajaxify.data.searchDefaultIn;
+			
+      $('#search-in').val(formData.in);
+			
+      updateFormItemVisiblity(formData.in);
 
-			if (formData.matchWords) {
-				$('#match-words-filter').val(formData.matchWords);
-			}
+			// if (formData.matchWords) {
+			// 	$('#match-words-filter').val(formData.matchWords);
+			// }
+      setValue('#match-words-filter', formData.matchWords);
 
-			if (formData.showAs) {
-				$('#show-results-as').val(formData.showAs);
-			}
+			// if (formData.showAs) {
+			// 	$('#show-results-as').val(formData.showAs);
+			// }
+      setValue('#show-results-as', formData.showAs);
 
 			if (formData.by) {
 				formData.by = Array.isArray(formData.by) ? formData.by : [formData.by];
@@ -178,9 +185,10 @@ define('forum/search', [
 				});
 			}
 
-			if (formData.categories) {
-				$('#posted-in-categories').val(formData.categories);
-			}
+			// if (formData.categories) {
+			// 	$('#posted-in-categories').val(formData.categories);
+			// }
+      setValue('#posted-in-categories', formData.categories);
 
 			if (formData.searchChildren) {
 				$('#search-children').prop('checked', true);
@@ -206,13 +214,20 @@ define('forum/search', [
 			if (formData.sortBy || ajaxify.data.searchDefaultSortBy) {
 				$('#post-sort-by').val(formData.sortBy || ajaxify.data.searchDefaultSortBy);
 			}
-			$('#post-sort-direction').val(formData.sortDirection || 'desc');
+			
+      $('#post-sort-direction').val(formData.sortDirection || 'desc');
 
 			hooks.fire('action:search.fillOutForm', {
 				form: formData,
 			});
 		}
 	}
+
+  function setValue(selector, value) {
+    if (value) {
+      $(selector).val(value);
+    }
+  }
 
 	function handleSavePreferences() {
 		$('#save-preferences').on('click', function () {
