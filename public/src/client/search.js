@@ -156,112 +156,59 @@ define('forum/search', [
 		const formData = utils.merge(searchData, params);
 
 		if (formData) {
-			
-      // if (ajaxify.data.term) {
-			// 	$('#search-input').val(ajaxify.data.term);
-			// }
-      setValue('#search-input', ajaxify.data.term);
-			
-      formData.in = formData.in || ajaxify.data.searchDefaultIn;
-			
-      $('#search-in').val(formData.in);
-			
-      updateFormItemVisiblity(formData.in);
-
-			// if (formData.matchWords) {
-			// 	$('#match-words-filter').val(formData.matchWords);
-			// }
-      setValue('#match-words-filter', formData.matchWords);
-
-			// if (formData.showAs) {
-			// 	$('#show-results-as').val(formData.showAs);
-			// }
-      setValue('#show-results-as', formData.showAs);
-
-			// if (formData.by) {
-			// 	formData.by = Array.isArray(formData.by) ? formData.by : [formData.by];
-			// 	formData.by.forEach(function (by) {
-			// 		$('#posted-by-user').tagsinput('add', by);
-			// 	});
-			// }
-      setTag('#posted-by-user', formData.by);
-
-			// if (formData.categories) {
-			// 	$('#posted-in-categories').val(formData.categories);
-			// }
-      setValue('#posted-in-categories', formData.categories);
-
-			// if (formData.searchChildren) {
-			// 	$('#search-children').prop('checked', true);
-			// }
-      setTrue('#search-children', formData.searchChildren);
-
-			// if (formData.hasTags) {
-			// 	formData.hasTags = Array.isArray(formData.hasTags) ? formData.hasTags : [formData.hasTags];
-			// 	formData.hasTags.forEach(function (tag) {
-			// 		$('#has-tags').tagsinput('add', tag);
-			// 	});
-			// }
-      setTag('#has-tags', formData.hasTags);
-
-			// if (formData.replies) {
-			// 	$('#reply-count').val(formData.replies);
-			// 	$('#reply-count-filter').val(formData.repliesFilter);
-			// }
-      setMultiValue('#reply-count', '#reply-count-filter', formData.replies, formData.repliesFilter);
-
-			// if (formData.timeRange) {
-			// 	$('#post-time-range').val(formData.timeRange);
-			// 	$('#post-time-filter').val(formData.timeFilter);
-			// }
-      setMultiValue('#post-time-range', '#post-time-filter', formData.timeRange, formData.timeFilter);
-
-			// if (formData.sortBy || ajaxify.data.searchDefaultSortBy) {
-			// 	$('#post-sort-by').val(formData.sortBy || ajaxify.data.searchDefaultSortBy);
-			// }
-      setSortBy('#post-sort-by', formData.sortBy, ajaxify.data.searchDefaultSortBy);
-			
-      $('#post-sort-direction').val(formData.sortDirection || 'desc');
-
+			setValue('#search-input', ajaxify.data.term);
+			formData.in = formData.in || ajaxify.data.searchDefaultIn;
+			$('#search-in').val(formData.in);
+			updateFormItemVisiblity(formData.in);
+			setValue('#match-words-filter', formData.matchWords);
+			setValue('#show-results-as', formData.showAs);
+			setTag('#posted-by-user', formData.by);
+			setValue('#posted-in-categories', formData.categories);
+			setTrue('#search-children', formData.searchChildren);
+			setTag('#has-tags', formData.hasTags);
+			setMultiValue('#reply-count', '#reply-count-filter', formData.replies, formData.repliesFilter);
+			setMultiValue('#post-time-range', '#post-time-filter', formData.timeRange, formData.timeFilter);
+			setSortBy('#post-sort-by', formData.sortBy, ajaxify.data.searchDefaultSortBy);
+			$('#post-sort-direction').val(formData.sortDirection || 'desc');
 			hooks.fire('action:search.fillOutForm', {
 				form: formData,
 			});
 		}
 	}
 
-  function setValue(selector, value) {
-    if (value) {
-      $(selector).val(value);
-    }
-  }
+	function setValue(selector, value) {
+		if (value) {
+			$(selector).val(value);
+		}
+	}
 
-  function setTag(selector, tags) {
-    if (tags) {
-      tags = Array.isArray(tags) ? tags : [tags];
-      tags.forEach(function (tag) {
-        $(selector).tagsinput('add', tag);
-      });
-    }
-  }
+	function setTag(selector, tags) {
+		if (tags) {
+			tags = Array.isArray(tags) ? tags : [tags];
+			tags.forEach(function (tag) {
+				$(selector).tagsinput('add', tag);
+			});
+		}
+	}
 
-  function setTrue(selector, search) {
-    if (search) {
-      $(selector).prop('checked', true);
-    }
-  }
+	function setTrue(selector, search) {
+		if (search) {
+			$(selector).prop('checked', true);
+		}
+	}
 
-  function setMultiValue(selector1, selector2, value1, value2) {
-    if (value1) {
-      $(selector1).val(value1);
-      $(selector2).val(value2);
-    }
-  }
+	function setMultiValue(selector1, selector2, value1, value2) {
+		if (value1) {
+			$(selector1).val(value1);
+			$(selector2).val(value2);
+		}
+	}
 
-  function setSortBy(selector, value, defaultValue) {
-    if (value || defaultValue) {
-      $(selector).val(value || defaultValue);
-    }
-  }
+	function setSortBy(selector, value, defaultValue) {
+		if (value || defaultValue) {
+			$(selector).val(value || defaultValue);
+		}
+	}
 
 	function handleSavePreferences() {
 		$('#save-preferences').on('click', function () {
