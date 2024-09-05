@@ -178,12 +178,13 @@ define('forum/search', [
 			// }
       setValue('#show-results-as', formData.showAs);
 
-			if (formData.by) {
-				formData.by = Array.isArray(formData.by) ? formData.by : [formData.by];
-				formData.by.forEach(function (by) {
-					$('#posted-by-user').tagsinput('add', by);
-				});
-			}
+			// if (formData.by) {
+			// 	formData.by = Array.isArray(formData.by) ? formData.by : [formData.by];
+			// 	formData.by.forEach(function (by) {
+			// 		$('#posted-by-user').tagsinput('add', by);
+			// 	});
+			// }
+      setTag('#posted-by-user', formData.by);
 
 			// if (formData.categories) {
 			// 	$('#posted-in-categories').val(formData.categories);
@@ -194,12 +195,13 @@ define('forum/search', [
 				$('#search-children').prop('checked', true);
 			}
 
-			if (formData.hasTags) {
-				formData.hasTags = Array.isArray(formData.hasTags) ? formData.hasTags : [formData.hasTags];
-				formData.hasTags.forEach(function (tag) {
-					$('#has-tags').tagsinput('add', tag);
-				});
-			}
+			// if (formData.hasTags) {
+			// 	formData.hasTags = Array.isArray(formData.hasTags) ? formData.hasTags : [formData.hasTags];
+			// 	formData.hasTags.forEach(function (tag) {
+			// 		$('#has-tags').tagsinput('add', tag);
+			// 	});
+			// }
+      setTag('#has-tags', formData.hasTags);
 
 			if (formData.replies) {
 				$('#reply-count').val(formData.replies);
@@ -226,6 +228,15 @@ define('forum/search', [
   function setValue(selector, value) {
     if (value) {
       $(selector).val(value);
+    }
+  }
+
+  function setTag(selector, tags) {
+    if (tags) {
+      tags = Array.isArray(tags) ? tags : [tags];
+      tags.forEach(function (tag) {
+        $(selector).tagsinput('add', tag);
+      });
     }
   }
 
