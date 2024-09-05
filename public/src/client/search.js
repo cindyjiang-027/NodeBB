@@ -191,9 +191,10 @@ define('forum/search', [
 			// }
       setValue('#posted-in-categories', formData.categories);
 
-			if (formData.searchChildren) {
-				$('#search-children').prop('checked', true);
-			}
+			// if (formData.searchChildren) {
+			// 	$('#search-children').prop('checked', true);
+			// }
+      setTrue('#search-children', formData.searchChildren);
 
 			// if (formData.hasTags) {
 			// 	formData.hasTags = Array.isArray(formData.hasTags) ? formData.hasTags : [formData.hasTags];
@@ -237,6 +238,12 @@ define('forum/search', [
       tags.forEach(function (tag) {
         $(selector).tagsinput('add', tag);
       });
+    }
+  }
+
+  function setTrue(selector, search) {
+    if (search) {
+      $(selector).prop('checked', true);
     }
   }
 
