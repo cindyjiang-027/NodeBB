@@ -216,9 +216,10 @@ define('forum/search', [
 			// }
       setMultiValue('#post-time-range', '#post-time-filter', formData.timeRange, formData.timeFilter);
 
-			if (formData.sortBy || ajaxify.data.searchDefaultSortBy) {
-				$('#post-sort-by').val(formData.sortBy || ajaxify.data.searchDefaultSortBy);
-			}
+			// if (formData.sortBy || ajaxify.data.searchDefaultSortBy) {
+			// 	$('#post-sort-by').val(formData.sortBy || ajaxify.data.searchDefaultSortBy);
+			// }
+      setSortBy('#post-sort-by', formData.sortBy, ajaxify.data.searchDefaultSortBy);
 			
       $('#post-sort-direction').val(formData.sortDirection || 'desc');
 
@@ -253,6 +254,12 @@ define('forum/search', [
     if (value1) {
       $(selector1).val(value1);
       $(selector2).val(value2);
+    }
+  }
+
+  function setSortBy(selector, value, defaultValue) {
+    if (value || defaultValue) {
+      $(selector).val(value || defaultValue);
     }
   }
 
